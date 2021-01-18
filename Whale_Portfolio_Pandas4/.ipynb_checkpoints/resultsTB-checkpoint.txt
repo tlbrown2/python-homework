@@ -1,0 +1,1 @@
+Net_Total,Number_Months,Max_Profit_Loss,Max_Profit_Gain,Average_Profit
