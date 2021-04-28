@@ -27,7 +27,7 @@ contract AssociateProfitSplitter {
         // @TODO: Split `msg.value` into three
         uint amount = msg.value.div(3); // Your code here!
         uint return_amount = msg.value.sub(amount).mul(3);
-        balances[msg.sender] = balances[msg.sender].add(amount);
+        //msg.sender = msg.sender.add(amount);
 
         // @TODO: Transfer the amount to each employee
         employee_one.transfer(amount);
