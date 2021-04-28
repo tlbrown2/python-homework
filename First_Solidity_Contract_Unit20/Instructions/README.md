@@ -168,7 +168,7 @@ I used the starter code to perform the following:
 
  I got errors when I sent an amount other than 0. This was probably due to me not putting the right address in the deployed transaction section. However, my code did correctly compile and deploy. I can't remember how to actually get the information out of the Remix deployed contract section.
 
-![Remix Deploy](Images/Deferred Equity_atDeploy0.png)
+![Remix Testing](Images/DeferredEquity_atDeploy0.png)
 
 
 ## Submission
