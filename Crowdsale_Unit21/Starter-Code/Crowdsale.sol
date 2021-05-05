@@ -8,20 +8,26 @@ import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/release-v2.5
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/release-v2.5.0/contracts/crowdsale/distribution/RefundablePostDeliveryCrowdsale.sol";
 
 // @TODO: Inherit the crowdsale contracts
-contract PupperCoinSale is CrowdSale, MintedCrowdsale, CappedCrowdsale, TimedCrowdsale, RefundablePostDeliveryCrowdsale {
+contract PupperCoinSale is Crowdsale, MintedCrowdsale, CappedCrowdsale, TimedCrowdsale, RefundablePostDeliveryCrowdsale {
+
+     //uint public rate = 1;
 
     constructor(
-        // @TODO: Fill in the constructor parameters!
-        string memory name,
-        string memory symbol,
+        // @TODO: Fill in the constructor parameters
+        
+        uint rate,
         address payable wallet,
-        uint goal,
         PupperCoin token,
-        uint rate = 1
+        uint goal,
+        uint open,
+        uint close
+        
     )
         // @TODO: Pass the constructor parameters to the crowdsale contracts.
         Crowdsale(rate,wallet,token)
         RefundableCrowdsale(goal)
+        TimedCrowdsale(open,close)
+        CappedCrowdsale(goal)
         public
     {
         // constructor can stay empty
@@ -32,12 +38,15 @@ contract PupperCoinSaleDeployer {
 
     address public token_sale_address;
     address public token_address;
+    uint public open = now;
+    uint public close = now + 24 weeks;
 
     constructor(
         // @TODO: Fill in the constructor parameters!
         string memory name,
         string memory symbol,
-        address payable wallet
+        address payable wallet,
+        uint goal
     )
         public
     {
@@ -45,7 +54,7 @@ contract PupperCoinSaleDeployer {
         PupperCoin token = new PupperCoin(name, symbol,0);
         token_address = address(token);
         
-        PupperCoinSale puppercoin_sale = new PupperCoinSale(1,wallet,token);
+        PupperCoinSale puppercoin_sale = new PupperCoinSale(1,wallet,token,goal,open,close);
         
         // point of sale system
         token_sale_address = address(puppercoin_sale);
